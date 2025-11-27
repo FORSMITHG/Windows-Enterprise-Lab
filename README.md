@@ -5,46 +5,63 @@ Automated Windows Server lab for building an enterprise-style environment with A
 This lab is designed for home or test environments that simulate a small/medium business network.
 
 ## Features
-
 - Automated deployment of a new AD forest and domain
 - DNS and DHCP configuration for a lab subnet
 - Opinionated OU structure for workstations, servers and service accounts
 - Baseline GPOs for security and operations
-- Repeatable process documented as a runbook
+- Repeatable deployment for consistent testing
 
 ## Lab Goals
-
 - Practice domain design, GPO management and operational tasks
-- Test hardening, configuration changes and new tools safely
-- Provide a foundation for VPN, SIEM and cloud-integration labs
+- Test hardening and configuration changes safely
+- Provide a foundation for additional labs (VPN, SIEM, cloud integration)
 
 ## Topology
-
 - 1 x Domain Controller (DC01)
-- Optional additional member servers or Windows clients
-- Single lab subnet (default 10.10.10.0/24)
-- Single AD forest and domain (default lab.gnt)
+- Optional member servers or Windows clients
+- Single lab subnet (default: `10.10.10.0/24`)
+- Domain: `lab.gnt`
 
-Details and variations are in `docs/02-network-topology.md`.
+More details in:  
+`docs/02-network-topology.md`
 
 ## Requirements
-
-- Hyper-V, VMware or Proxmox lab host
+- Hyper-V, VMware or Proxmox
 - Windows Server 2019 or 2022 ISO
-- Local admin access to the server that will become DC01
-- PowerShell 5.1+ or PowerShell 7 with remoting
+- Local admin rights on DC01
+- PowerShell 5.1+ or PowerShell 7
 
 ## Quick Start
 
-1. Build a clean Windows Server VM and assign:
-   - Static IP on your lab subnet
-   - Hostname: `DC01` (or change in config section of the scripts)
+1. Deploy a new Windows Server VM
+2. Assign static IP and rename to `DC01`
+3. Copy the `scripts` folder to `C:\Lab`
+4. Run:
 
-2. Copy the `scripts` folder to `C:\Lab` on DC01.
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope Process
+cd C:\Lab
+.\Deploy-ADDomain.ps1
+```
 
-3. Start an elevated PowerShell session and run:
+5. After reboot, log in as the new domain admin and run:
 
-   ```powershell
-   Set-ExecutionPolicy RemoteSigned -Scope Process
-   cd C:\Lab
-   .\Deploy-ADDomain.ps1
+```powershell
+cd C:\Lab
+.\PostDeploy-Baseline.ps1
+```
+
+6. Review documentation in the `docs` folder
+
+## Customization
+Change default settings in:
+
+- `scripts/Deploy-ADDomain.ps1`
+- `scripts/PostDeploy-Baseline.ps1`
+
+## Next Steps
+- Join member servers and clients
+- Add remote access (VPN)
+- Add logging + SIEM tools
+- Integrate Azure Entra ID / Intune
+- Expand VLANs + firewall rules in future repos
