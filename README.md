@@ -1,67 +1,91 @@
 # Windows Enterprise Lab
 
-Automated Windows Server lab for building an enterprise-style environment with Active Directory, DNS, DHCP and baseline Group Policy.
+Automated Windows Server lab for building an enterprise-style environment with Active Directory, DNS, DHCP (optional), and baseline Group Policy.
 
-This lab is designed for home or test environments that simulate a small/medium business network.
+<p>
+<img src="https://img.shields.io/badge/PowerShell-2CA5E0?style=flat&logo=powershell&logoColor=white">
+<img src="https://img.shields.io/badge/Windows_Server-0078D4?style=flat&logo=windows&logoColor=white">
+<img src="https://img.shields.io/badge/Hyper--V-0078D4?style=flat&logo=windows&logoColor=white">
+<img src="https://img.shields.io/badge/Active_Directory-005A9C?style=flat&logo=Microsoft&logoColor=white">
+<img src="https://img.shields.io/badge/VMware-607078?style=flat&logo=vmware&logoColor=white">
+</p>
+
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Topology](#topology)
+- [Requirements](#requirements)
+- [Deployment](#deployment)
+- [Documentation](#documentation)
+- [Scripts](#scripts)
+- [Validation](#validation)
+- [Next Steps](#next-steps)
+
+## Overview
+This lab is designed for SMB-style environments to practice identity, automation, security baselines, and network administration in a controlled home lab.
 
 ## Features
-- Automated deployment of a new AD forest and domain
-- DNS and DHCP configuration for a lab subnet
-- Opinionated OU structure for workstations, servers and service accounts
-- Baseline GPOs for security and operations
-- Repeatable deployment for consistent testing
-
-## Lab Goals
-- Practice domain design, GPO management and operational tasks
-- Test hardening and configuration changes safely
-- Provide a foundation for additional labs (VPN, SIEM, cloud integration)
+- Automated domain deployment
+- Baseline enterprise OU structure
+- Optional DHCP server setup
+- Security baseline Group Policies
+- Documentation + runbooks included
 
 ## Topology
 - 1 x Domain Controller (DC01)
-- Optional member servers or Windows clients
-- Single lab subnet (default: `10.10.10.0/24`)
-- Domain: `lab.gnt`
+- Subnet: `10.10.10.0/24`
+- DNS Server: `10.10.10.10`
 
-More details in:  
-`docs/02-network-topology.md`
+Network diagrams and design details:  
+docs/02-network-topology.md
+
+<p align="center">
+<img src="docs/topology-diagram.png" width="60%">
+</p>
 
 ## Requirements
-- Hyper-V, VMware or Proxmox
-- Windows Server 2019 or 2022 ISO
-- Local admin rights on DC01
-- PowerShell 5.1+ or PowerShell 7
+- Hyper-V, VMware, or Proxmox
+- Windows Server 2019/2022 ISO
+- Local admin on server
+- PowerShell 5.1/7
 
-## Quick Start
+## Deployment
+See: docs/03-deployment-runbook.md
 
-1. Deploy a new Windows Server VM
-2. Assign static IP and rename to `DC01`
-3. Copy the `scripts` folder to `C:\Lab`
-4. Run:
+Quick start commands:
 
 ```powershell
 Set-ExecutionPolicy RemoteSigned -Scope Process
 cd C:\Lab
 .\Deploy-ADDomain.ps1
-```
-
-5. After reboot, log in as the new domain admin and run:
-
-```powershell
-cd C:\Lab
 .\PostDeploy-Baseline.ps1
 ```
 
-6. Review documentation in the `docs` folder
+## Documentation
+Located in `/docs` folder:
+- 01-lab-overview.md
+- 02-network-topology.md
+- 03-deployment-runbook.md
 
-## Customization
-Change default settings in:
+## Scripts
+Located in `/scripts`:
+- Deploy-ADDomain.ps1
+- PostDeploy-Baseline.ps1
+- Validate-ADLab.ps1 (coming soon)
 
-- `scripts/Deploy-ADDomain.ps1`
-- `scripts/PostDeploy-Baseline.ps1`
+## Validation
+A validation script verifies:
+- AD DS
+- DNS zones
+- DHCP configuration
+- OU structure & GPOs applied
 
-## Next Steps
-- Join member servers and clients
-- Add remote access (VPN)
-- Add logging + SIEM tools
-- Integrate Azure Entra ID / Intune
-- Expand VLANs + firewall rules in future repos
+## Status
+| Version | Stage | Notes |
+|---------|-------|------|
+| v1.0.0 | Complete | Base lab automation delivered |
+
+## Future Roadmap
+- VPN remote access (separate repo)
+- SIEM + Sysmon logging repo
+- Hybrid identity w/ Entra ID
