@@ -19,7 +19,8 @@ Automated Windows Server lab for building an enterprise-style environment with A
 - [Documentation](#documentation)
 - [Scripts](#scripts)
 - [Validation](#validation)
-- [Next Steps](#next-steps)
+- [Status](#status)
+- [Future Roadmap](#future-roadmap)
 
 ## Overview
 This lab is designed for SMB-style environments to practice identity, automation, security baselines, and network administration in a controlled home lab.
@@ -36,7 +37,13 @@ This lab is designed for SMB-style environments to practice identity, automation
 - Subnet: `10.10.10.0/24`
 - DNS Server: `10.10.10.10`
 
-Network diagrams and design details:  
+Simple topology:
+
+```
+[Router / Firewall] ---> [10.10.10.0/24] ---> [DC01 - AD DS, DNS / DHCP (opt)]
+```
+
+Detailed network diagrams:
 docs/02-network-topology.md
 
 <p align="center">
