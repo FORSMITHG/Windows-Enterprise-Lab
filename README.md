@@ -69,10 +69,11 @@ cd C:\Lab
 ```
 
 ## Documentation
-Located in `/docs` folder:
-- 01-lab-overview.md
-- 02-network-topology.md
-- 03-deployment-runbook.md
+Located in the `/docs` folder:
+
+- [Lab Overview](docs/01-lab-overview.md)
+- [Network Topology](docs/02-network-topology.md)
+- [Deployment Runbook](docs/03-deployment-runbook.md)
 
 ## Scripts
 Located in `/scripts`:
