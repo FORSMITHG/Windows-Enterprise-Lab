@@ -77,9 +77,10 @@ Located in the `/docs` folder:
 
 ## Scripts
 Located in `/scripts`:
-- Deploy-ADDomain.ps1
-- PostDeploy-Baseline.ps1
-- Validate-ADLab.ps1 (coming soon)
+
+- [Deploy-ADDomain.ps1](scripts/Deploy-ADDomain.ps1)
+- [PostDeploy-Baseline.ps1](scripts/PostDeploy-Baseline.ps1)
+- [Validate-ADLab.ps1](scripts/Validate-ADLab.ps1)
 
 ## Validation
 A validation script verifies:
